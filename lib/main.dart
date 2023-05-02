@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'counter.dart';
 import 'home_page.dart';
+import 'student.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,8 +22,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         useMaterial3: true,
       ),
-      home: ChangeNotifierProvider<Counter>(
-        create: (context) => Counter(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<Student>(
+            create: (context) => Student(
+              name: 'Imran',
+              rollNo: 137,
+            ),
+          ),
+          ChangeNotifierProvider<Counter>(
+            create: (context) => Counter(),
+          ),
+        ],
         child: const MyHomePage(title: 'Flutter Developer'),
       ),
     );
